@@ -1,0 +1,67 @@
+{
+  "name": "cptmetro",
+  "version": "0.0.5",
+  "description": "A CLI to show rails system status for São Paulo",
+  "main": "index.js",
+  "scripts": {
+    "clear": "rimraf bin",
+    "build": "npm run clear && ./node_modules/.bin/babel --out-dir bin src",
+    "build:watch": "npm run build -- --watch",
+    "lint": "./node_modules/.bin/eslint src/*.js",
+    "prepush": "npm run lint",
+    "test": "./node_modules/.bin/mocha tests/**/*.spec.js --require babel-register --reporter nyan",
+    "test:tdd": "npm run test -- --watch",
+    "test:coverage": "nyc npm test"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "cptmetro": "bin/main.js"
+  },
+  "nyc": {
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "tests/**"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitormargis/cptmetro.git"
+  },
+  "keywords": [
+    "js",
+    "tdd",
+    "library"
+  ],
+  "author": "Willian Justen <vitor@margis.com.br> (https://vitormargis.com.br/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vitormargis/cptmetro/issues"
+  },
+  "homepage": "https://github.com/vitormargis/cptmetro#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.3.2",
+    "babel-register": "^6.24.0",
+    "chai": "^3.5.0",
+    "eslint": "^4.0.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.6.1",
+    "husky": "^0.11.9",
+    "mocha": "^3.2.0",
+    "nock": "^9.0.13",
+    "nyc": "^10.2.0",
+    "rimraf": "^2.6.1",
+    "sinon": "^2.3.6",
+    "sinon-chai": "^2.11.0"
+  },
+  "dependencies": {
+    "chalk": "^2.0.1",
+    "cli-table": "^0.3.1",
+    "commander": "^2.10.0",
+    "ora": "^1.3.0",
+    "request": "^2.81.0"
+  }
+}
