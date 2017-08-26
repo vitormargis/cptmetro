@@ -1,6 +1,6 @@
 {
   "name": "cptmetro",
-  "version": "0.0.6",
+  "version": "0.0.9",
   "description": "A CLI to show rails system status for São Paulo",
   "main": "index.js",
   "scripts": {
