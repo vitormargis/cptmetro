@@ -10,12 +10,12 @@ program
 
   Lines:                      Status:
 
-    Linha 1 - Azul            (1) Operação Normal
-    Linha 2 - Verde           (2) Operação Encerrada
-    Linha 3 - Vermelha        (3) Operação Parcial
-    Linha 4 - Amarela         (4) Velocidade Reduzida
-    Linha 5 - Lilás           (5) Paralisada
-    Linha 15 - Prata          (6) Dados Indisponíveis`)
+    Linha 1 - Azul              (1) Operação Normal
+    Linha 2 - Verde             (2) Operação Encerrada
+    Linha 3 - Vermelha          (3) Operação Parcial
+    Linha 4 - Amarela           (4) Velocidade Reduzida
+    Linha 5 - Lilás             (5) Paralisada
+    Linha 15 - Prata            (6) Dados Indisponíveis`)
 
   .option('-l, --line <currency>', 'Show status for specific line. (ex: 1,2)')
   .option('-s, --status <amount>', 'Show only lines with that status. (ex: 1)')

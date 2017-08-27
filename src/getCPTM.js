@@ -2,6 +2,7 @@ const request = require('request');
 const cheerio = require('cheerio');
 
 const url = 'https://www.cptm.sp.gov.br/Pages/Home.aspx';
+let tries = 0;
 
 const ids = {
   RUBI: '7',
@@ -30,7 +31,6 @@ const cliColors = {
   SAFIRA: 'blue'
 };
 
-let tries = 0;
 
 const getCPTM = () =>
   new Promise((resolve, reject) => {

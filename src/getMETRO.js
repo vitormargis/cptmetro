@@ -1,6 +1,7 @@
 const request = require('request');
 
 const url = 'http://www.viaquatro.com.br/generic/Main/LineStatus';
+let tries = 0;
 
 const cliColors = {
   Azul: 'blueBright',
@@ -51,7 +52,7 @@ const infos = {
 
 const getMETRO = () =>
   new Promise((resolve, reject) => {
-    request.get({ url }, (error, response) => {
+    const req = () => request.get({ url }, (error, response) => {
       if (!error) {
         const apiResponse = JSON.parse(response.body);
 
@@ -97,9 +98,11 @@ const getMETRO = () =>
 
         resolve(metroLines);
       } else {
-        reject(error);
+        if (++tries > 5) return reject(error);
+        setTimeout(() => req(), 2000);
       }
     });
+    req();
   });
 
 module.exports = getMETRO();
