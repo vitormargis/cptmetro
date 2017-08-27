@@ -1,5 +1,5 @@
-const request = require('request');
-const cheerio = require('cheerio');
+import request from 'request';
+import cheerio from 'cheerio';
 
 const url = 'https://www.cptm.sp.gov.br/Pages/Home.aspx';
 let tries = 0;

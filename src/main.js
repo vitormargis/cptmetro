@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const program = require('commander');
-const pkg = require('../package.json');
-const cptmetro = require('./cptmetro');
+import program from 'commander';
+import pkg from '../package.json';
+import cptmetro from './cptmetro';
 
 program
   .version(pkg.version)

@@ -1,4 +1,4 @@
-const request = require('request');
+import request from 'request';
 
 const url = 'http://www.viaquatro.com.br/generic/Main/LineStatus';
 let tries = 0;

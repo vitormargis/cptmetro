@@ -1,9 +1,17 @@
 'use strict';
 
-var request = require('request');
-var cheerio = require('cheerio');
+var _request = require('request');
+
+var _request2 = _interopRequireDefault(_request);
+
+var _cheerio = require('cheerio');
+
+var _cheerio2 = _interopRequireDefault(_cheerio);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var url = 'https://www.cptm.sp.gov.br/Pages/Home.aspx';
+var tries = 0;
 
 var ids = {
   RUBI: '7',
@@ -32,14 +40,12 @@ var cliColors = {
   SAFIRA: 'blue'
 };
 
-var tries = 0;
-
 var getCPTM = function getCPTM() {
   return new Promise(function (resolve, reject) {
     var req = function req() {
-      return request.get({ url: url }, function (error, response) {
+      return _request2.default.get({ url: url }, function (error, response) {
         if (!error) {
-          var $ = cheerio.load(response.body);
+          var $ = _cheerio2.default.load(response.body);
           var json = [];
           var fisrtColumns = {
             Id: '0',

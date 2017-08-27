@@ -1,12 +1,28 @@
 'use strict';
 
-var chalk = require('chalk');
-var ora = require('ora');
-var Table = require('cli-table');
-var metro = require('./getMETRO');
-var cptm = require('./getCPTM');
+var _chalk = require('chalk');
 
-var spinner = ora({
+var _chalk2 = _interopRequireDefault(_chalk);
+
+var _ora = require('ora');
+
+var _ora2 = _interopRequireDefault(_ora);
+
+var _cliTable = require('cli-table');
+
+var _cliTable2 = _interopRequireDefault(_cliTable);
+
+var _getMETRO = require('./getMETRO');
+
+var _getMETRO2 = _interopRequireDefault(_getMETRO);
+
+var _getCPTM = require('./getCPTM');
+
+var _getCPTM2 = _interopRequireDefault(_getCPTM);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var spinner = (0, _ora2.default)({
   text: 'Retrieving metro data...',
   color: 'white'
 });
@@ -17,13 +33,13 @@ function convertBTC(options) {
 
   var statusWithIcon = {
     'Status': 'Status',
-    'Operação Normal': chalk.green('\u2713') + ' Opera\xE7\xE3o Normal',
-    'Operação Encerrada': chalk.red('\u275A') + ' Opera\xE7\xE3o Encerrada',
-    'Operações Encerradas': chalk.red('\u275A') + ' Opera\xE7\xE3o Encerrada',
-    'Operação Parcial': chalk.yellow('\u2770') + ' Opera\xE7\xE3o Parcial',
-    'Velocidade Reduzida': chalk.yellow('\u2770') + ' Velocidade Reduzida',
-    'Paralisada': chalk.red('\u2715') + ' Paralisada',
-    'Dados Indisponíveis': chalk.red('?') + ' Dado Indispon\xEDvel'
+    'Operação Normal': _chalk2.default.green('\u2713') + ' Opera\xE7\xE3o Normal',
+    'Operação Encerrada': _chalk2.default.red('\u275A') + ' Opera\xE7\xE3o Encerrada',
+    'Operações Encerradas': _chalk2.default.red('\u275A') + ' Opera\xE7\xE3o Encerrada',
+    'Operação Parcial': _chalk2.default.yellow('\u2770') + ' Opera\xE7\xE3o Parcial',
+    'Velocidade Reduzida': _chalk2.default.yellow('\u2770') + ' Velocidade Reduzida',
+    'Paralisada': _chalk2.default.red('\u2715') + ' Paralisada',
+    'Dados Indisponíveis': _chalk2.default.red('?') + ' Dado Indispon\xEDvel'
   };
 
   var statusId = {
@@ -38,7 +54,7 @@ function convertBTC(options) {
   };
 
   spinner.start();
-  return Promise.all([metro, cptm]).then(function (data) {
+  return Promise.all([_getMETRO2.default, _getCPTM2.default]).then(function (data) {
     spinner.stop();
 
     var metroData = data[0];
@@ -62,20 +78,20 @@ function convertBTC(options) {
       });
     }
 
-    var tableMETRO = new Table({
+    var tableMETRO = new _cliTable2.default({
       colWidths: metroData.map(function () {
         return 23;
       })
     });
 
-    var tableCPTM = new Table({
+    var tableCPTM = new _cliTable2.default({
       colWidths: cptmData.map(function () {
         return 23;
       })
     });
 
     var aAresponseLines = metroData.map(function (item) {
-      return [chalk[item.chalk](item.Line)];
+      return [_chalk2.default[item.chalk](item.Line)];
     });
     var aAresponseStatus = metroData.map(function (item) {
       return [statusWithIcon[item.StatusMetro]];
@@ -91,7 +107,7 @@ function convertBTC(options) {
     });
 
     var bAresponseLines = cptmData.map(function (item) {
-      return [chalk[item.chalk](item.Line)];
+      return [_chalk2.default[item.chalk](item.Line)];
     });
     var bAresponseStatus = cptmData.map(function (item) {
       return [statusWithIcon[item.StatusMetro]];

@@ -1,8 +1,8 @@
-const chalk = require('chalk');
-const ora = require('ora');
-const Table = require('cli-table');
-const metro = require('./getMETRO');
-const cptm = require('./getCPTM');
+import chalk from 'chalk';
+import ora from 'ora';
+import Table from 'cli-table';
+import metro from './getMETRO';
+import cptm from './getCPTM';
 
 const spinner = ora({
   text: 'Retrieving metro data...',
