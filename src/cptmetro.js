@@ -95,6 +95,7 @@ function convertBTC(options) {
     console.log('');
   }).catch((error) => {
     spinner.stop();
+    console.log('Conection error, try again.');
     return error;
   });
 }
