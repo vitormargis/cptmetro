@@ -32,6 +32,8 @@ var cliColors = {
   SAFIRA: 'blue'
 };
 
+var tries = 0;
+
 var getCPTM = function getCPTM() {
   return new Promise(function (resolve, reject) {
     var req = function req() {
@@ -62,8 +64,9 @@ var getCPTM = function getCPTM() {
           json.unshift(fisrtColumns);
           resolve(json);
         } else {
+          if (++tries > 5) return reject(error);
           setTimeout(function () {
-            req();
+            return req();
           }, 2000);
         }
       });

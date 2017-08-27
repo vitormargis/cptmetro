@@ -15,7 +15,7 @@ function convertBTC(options) {
   var optionLine = options.line ? options.line.split(',') : false;
   var optionStatus = options.status ? options.status.split(',') : false;
 
-  var status = {
+  var statusWithIcon = {
     'Status': 'Status',
     'Operação Normal': chalk.green('\u2713') + ' Opera\xE7\xE3o Normal',
     'Operação Encerrada': chalk.red('\u275A') + ' Opera\xE7\xE3o Encerrada',
@@ -24,6 +24,17 @@ function convertBTC(options) {
     'Velocidade Reduzida': chalk.yellow('\u2770') + ' Velocidade Reduzida',
     'Paralisada': chalk.red('\u2715') + ' Paralisada',
     'Dados Indisponíveis': chalk.red('?') + ' Dado Indispon\xEDvel'
+  };
+
+  var statusId = {
+    'Status': '0',
+    'Operação Normal': '1',
+    'Operação Encerrada': '2',
+    'Operações Encerradas': '3',
+    'Operação Parcial': '4',
+    'Velocidade Reduzida': '5',
+    'Paralisada': '6',
+    'Dados Indisponíveis': '7'
   };
 
   spinner.start();
@@ -39,6 +50,15 @@ function convertBTC(options) {
       });
       cptmData = cptmData.filter(function (line) {
         return optionLine.indexOf(line.Id) >= 0 || line.Id === '0' ? line : null;
+      });
+    }
+
+    if (optionStatus) {
+      metroData = metroData.filter(function (line) {
+        return optionStatus.indexOf(statusId[line.StatusMetro]) >= 0 || statusId[line.StatusMetro] === '0' ? line : null;
+      });
+      cptmData = cptmData.filter(function (line) {
+        return optionStatus.indexOf(statusId[line.StatusMetro]) >= 0 || statusId[line.StatusMetro] === '0' ? line : null;
       });
     }
 
@@ -58,7 +78,7 @@ function convertBTC(options) {
       return [chalk[item.chalk](item.Line)];
     });
     var aAresponseStatus = metroData.map(function (item) {
-      return [status[item.StatusMetro]];
+      return [statusWithIcon[item.StatusMetro]];
     });
     var aAresponseStations = metroData.map(function (item) {
       return ['' + item.info.stations];
@@ -74,7 +94,7 @@ function convertBTC(options) {
       return [chalk[item.chalk](item.Line)];
     });
     var bAresponseStatus = cptmData.map(function (item) {
-      return [status[item.StatusMetro]];
+      return [statusWithIcon[item.StatusMetro]];
     });
 
     tableMETRO.push(aAresponseLines, aAresponseStatus, aAresponseStations, aAresponseLength, aAresponseInalguration);
@@ -90,6 +110,7 @@ function convertBTC(options) {
     console.log('');
   }).catch(function (error) {
     spinner.stop();
+    console.log('Conection error, try again.');
     return error;
   });
 }
