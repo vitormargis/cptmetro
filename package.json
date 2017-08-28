@@ -1,11 +1,11 @@
 {
   "name": "cptmetro",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A CLI to show rails system status for São Paulo",
   "main": "index.js",
   "scripts": {
     "clear": "rimraf bin",
-    "build": "npm run clear && ./node_modules/.bin/babel --out-dir bin src",
+    "build": "npm run clear && ./node_modules/.bin/babel --out-dir lib src",
     "build:watch": "npm run build -- --watch",
     "lint": "./node_modules/.bin/eslint src/*.js",
     "prepush": "npm run lint",
@@ -14,8 +14,11 @@
     "test:coverage": "nyc npm test"
   },
   "preferGlobal": true,
+  "files": [
+    "lib"
+  ],
   "bin": {
-    "cptmetro": "bin/main.js"
+    "cptmetro": "lib/cli.js"
   },
   "nyc": {
     "reporter": [
@@ -43,6 +46,8 @@
   "homepage": "https://github.com/vitormargis/cptmetro#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.3.2",
     "babel-register": "^6.24.0",
     "chai": "^3.5.0",
@@ -55,13 +60,15 @@
     "nyc": "^10.2.0",
     "rimraf": "^2.6.1",
     "sinon": "^2.3.6",
-    "sinon-chai": "^2.11.0"
+    "sinon-chai": "^2.11.0",
+    "webpack": "^3.5.5"
   },
   "dependencies": {
     "chalk": "^2.0.1",
     "cheerio": "^1.0.0-rc.2",
     "cli-table": "^0.3.1",
     "commander": "^2.10.0",
+    "node-fetch": "^1.7.2",
     "ora": "^1.3.0",
     "request": "^2.81.0"
   }
