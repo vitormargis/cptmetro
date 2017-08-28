@@ -58,7 +58,7 @@ function cptmetro(options) {
   };
 
   spinner.start();
-  return Promise.all([metro, cptm]).then((data) => {
+  return Promise.all([metro(), cptm()]).then((data) => {
     spinner.stop();
 
     let metroData = data[0];
@@ -86,14 +86,17 @@ function cptmetro(options) {
       colWidths: cptmData.map(() => 23)
     });
 
-    const aAresponseLines = metroData.map(item => [chalk[item.chalk](item.Line)]);
-    const aAresponseStatus = metroData.map(item => [statusWithIcon[item.StatusMetro]]);
-    const aAresponseStations = metroData.map(item => [`${item.info.stations}`]);
-    const aAresponseLength = metroData.map(item => [`${item.info.length}`]);
-    const aAresponseInalguration = metroData.map(item => [`${item.info.inalguration}`]);
+    const aAresponseLines = metroData.map(item => [chalk[item.chalk](item.name)]);
+    const aAresponseStatus = metroData.map(item => [statusWithIcon[item.status]]);
+    const aAresponseStations = metroData.map(item => [`Stations: ${item.info.stations}`]);
+    const aAresponseLength = metroData.map(item => [`Length: ${item.info.length}`]);
+    const aAresponseInalguration = metroData.map(item => [`Inalguration: ${item.info.inalguration}`]);
 
-    const bAresponseLines = cptmData.map(item => [chalk[item.chalk](item.Line)]);
-    const bAresponseStatus = cptmData.map(item => [statusWithIcon[item.StatusMetro]]);
+    const bAresponseLines = cptmData.map(item => [chalk[item.chalk](item.name)]);
+    const bAresponseStatus = cptmData.map(item => [statusWithIcon[item.status]]);
+    const bAresponseStations = metroData.map(item => [`Stations: ${item.info.stations}`]);
+    const bAresponseLength = metroData.map(item => [`Length: ${item.info.length}`]);
+    const bAresponseInalguration = metroData.map(item => [`Inalguration: ${item.info.inalguration}`]);
 
     tableMETRO.push(
       aAresponseLines,
@@ -105,7 +108,10 @@ function cptmetro(options) {
 
     tableCPTM.push(
       bAresponseLines,
-      bAresponseStatus
+      bAresponseStatus,
+      bAresponseStations,
+      bAresponseLength,
+      bAresponseInalguration
     );
 
     console.log('');

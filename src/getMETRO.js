@@ -50,59 +50,61 @@ const infos = {
   }
 };
 
+const addViaQuatro = (metroLines, apiResponse) => {
+  metroLines.push({
+    Id: '4',
+    Color: 'Amarela',
+    Line: 'Linha 4 - Amarela',
+    LineRaw: 'Linha 4',
+    StatusMetro: apiResponse.CurrentLineStatus.Status
+  });
+  metroLines.sort((a, b) => (parseFloat(a.Id) - parseFloat(b.Id)));
+  return metroLines
+}
+
+const parseLine = (line) => {
+  let info = {};
+  switch (line.Id) {
+    case '0': info = infos.linha0; break;
+    case '1': info = infos.linha1; break;
+    case '2': info = infos.linha2; break;
+    case '3': info = infos.linha3; break;
+    case '4': info = infos.linha4; break;
+    case '5': info = infos.linha5; break;
+    case '15': info = infos.linha15; break;
+    default: info = {};
+  }
+
+  const parsedLine = {
+    id: line.Id,
+    color: line.Color,
+    name: line.Line,
+    status: line.StatusMetro
+  }
+
+  return Object.assign(parsedLine, {
+    chalk: cliColors[line.Color], info
+  });
+}
+
 const getMETRO = () =>
   new Promise((resolve, reject) => {
-    const req = () => request.get({ url }, (error, response) => {
+    const requestMetro = () => request.get({ url }, (error, response) => {
       if (!error) {
         const apiResponse = JSON.parse(response.body);
-
         let metroLines = apiResponse.StatusMetro.ListLineStatus;
 
-        const fisrtColumns = {
-          Id: '0',
-          Color: 'Prata',
-          Line: 'Line',
-          LineRaw: 'Linha',
-          StatusMetro: 'Status'
-        };
+        metroLines = addViaQuatro(metroLines, apiResponse);
+        metroLines = metroLines.map(parseLine);
 
-        const linha4 = {
-          Id: '4',
-          Color: 'Amarela',
-          Line: 'Linha 4 - Amarela',
-          LineRaw: 'Linha 4',
-          StatusMetro: apiResponse.CurrentLineStatus.Status
-        };
-
-        metroLines.push(linha4);
-        metroLines.sort((a, b) => (parseFloat(a.Id) - parseFloat(b.Id)));
-        metroLines.unshift(fisrtColumns);
-
-        metroLines = metroLines.map((line) => {
-          let info = {};
-          switch (line.Id) {
-            case '0': info = infos.linha0; break;
-            case '1': info = infos.linha1; break;
-            case '2': info = infos.linha2; break;
-            case '3': info = infos.linha3; break;
-            case '4': info = infos.linha4; break;
-            case '5': info = infos.linha5; break;
-            case '15': info = infos.linha15; break;
-            default: info = {};
-          }
-
-          return Object.assign(line, {
-            chalk: cliColors[line.Color], info
-          });
-        });
-
-        resolve(metroLines);
-      } else {
-        if (++tries > 5) return reject(error);
-        setTimeout(() => req(), 2000);
+        return resolve(metroLines);
       }
+
+      if (++tries > 5) return reject(error);
+      return setTimeout(() => requestMetro(), 2000);
     });
-    req();
+
+    requestMetro();
   });
 
-module.exports = getMETRO();
+module.exports = getMETRO;

@@ -1,9 +1,9 @@
 import cptm from './getCPTM';
 import metro from './getMETRO';
 
-const cptmetro = () => ({
-    cptm,
-    metro
+const CPTMetro = () => ({
+  cptm :cptm,
+  metro: metro
 })
 
-export default cptmetro;
+export default CPTMetro();
