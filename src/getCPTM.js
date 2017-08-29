@@ -2,7 +2,6 @@ import request from 'request';
 import cheerio from 'cheerio';
 
 const url = 'https://www.cptm.sp.gov.br/Pages/Home.aspx';
-let tries = 0;
 
 const ids = {
   RUBI: '7',
@@ -64,9 +63,7 @@ const infos = {
   }
 };
 
-
-
-const getCPTM = () =>
+const getCPTM = (tries = 0) =>
   new Promise((resolve, reject) => {
     const requestCPTM = () => request.get({ url }, (error, response) => {
       if (!error) {

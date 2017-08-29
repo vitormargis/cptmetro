@@ -1,7 +1,6 @@
 import request from 'request';
 
 const url = 'http://www.viaquatro.com.br/generic/Main/LineStatus';
-let tries = 0;
 
 const cliColors = {
   Azul: 'blueBright',
@@ -87,7 +86,7 @@ const parseLine = (line) => {
   });
 }
 
-const getMETRO = () =>
+const getMETRO = (tries = 0) =>
   new Promise((resolve, reject) => {
     const requestMetro = () => request.get({ url }, (error, response) => {
       if (!error) {
