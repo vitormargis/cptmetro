@@ -1,6 +1,6 @@
 # CPTM & Metro Status
 
-> A CLI to show rails system status for São Paulo.
+> A Wrapper & CLI to show rails system status for São Paulo.
 
 ![Example CLI running](img/cptmetro.gif)
 
@@ -10,8 +10,23 @@
 $ npm install -g cptmetro
 ```
 
-### How to use
+### Wrapper Usage
 
+```js
+
+  cptmetro.metro().then(data => {
+    // Will return  data for METRO
+    return data;
+  });
+
+  cptmetro.cptm().then(data => {
+    // Will return  data for CPTM
+    return data;
+  });
+
+```
+
+### CLI usage
 ```sh
 
 Lines:                      Status:

@@ -22,8 +22,8 @@ program
     Linha 5 - Lilás             (5) Paralisada
     Linha 15 - Prata            (6) Dados Indisponíveis`)
 
-  .option('-l, --line <currency>', 'Show status for specific line. (ex: 1,2)')
-  .option('-s, --status <amount>', 'Show only lines with that status. (ex: 1)')
+  .option('-l, --line <line>', 'Show status for specific line. (ex: 1,2)')
+  .option('-s, --status <status>', 'Show only lines with that status. (ex: 1)')
   .parse(process.argv);
 
 const spinner = ora({
@@ -66,16 +66,16 @@ function cptmetro(options) {
 
     if (optionLine) {
       metroData = metroData.filter(line =>
-        ((optionLine.indexOf(line.Id) >= 0 || line.Id === '0') ? line : null));
+        ((optionLine.indexOf(line.id) >= 0) ? line : null));
       cptmData = cptmData.filter(line =>
-        ((optionLine.indexOf(line.Id) >= 0 || line.Id === '0') ? line : null));
+        ((optionLine.indexOf(line.id) >= 0) ? line : null));
     }
 
     if (optionStatus) {
       metroData = metroData.filter(line =>
-        ((optionStatus.indexOf(statusId[line.StatusMetro]) >= 0 || statusId[line.StatusMetro] === '0') ? line : null));
+        ((optionStatus.indexOf(statusId[line.status]) >= 0) ? line : null));
       cptmData = cptmData.filter(line =>
-        ((optionStatus.indexOf(statusId[line.StatusMetro]) >= 0 || statusId[line.StatusMetro] === '0') ? line : null));
+        ((optionStatus.indexOf(statusId[line.status]) >= 0) ? line : null));
     }
 
     const tableMETRO = new Table({
@@ -88,30 +88,18 @@ function cptmetro(options) {
 
     const aAresponseLines = metroData.map(item => [chalk[item.chalk](item.name)]);
     const aAresponseStatus = metroData.map(item => [statusWithIcon[item.status]]);
-    const aAresponseStations = metroData.map(item => [`Stations: ${item.info.stations}`]);
-    const aAresponseLength = metroData.map(item => [`Length: ${item.info.length}`]);
-    const aAresponseInalguration = metroData.map(item => [`Inalguration: ${item.info.inalguration}`]);
 
     const bAresponseLines = cptmData.map(item => [chalk[item.chalk](item.name)]);
     const bAresponseStatus = cptmData.map(item => [statusWithIcon[item.status]]);
-    const bAresponseStations = metroData.map(item => [`Stations: ${item.info.stations}`]);
-    const bAresponseLength = metroData.map(item => [`Length: ${item.info.length}`]);
-    const bAresponseInalguration = metroData.map(item => [`Inalguration: ${item.info.inalguration}`]);
 
     tableMETRO.push(
       aAresponseLines,
-      aAresponseStatus,
-      aAresponseStations,
-      aAresponseLength,
-      aAresponseInalguration
+      aAresponseStatus
     );
 
     tableCPTM.push(
       bAresponseLines,
-      bAresponseStatus,
-      bAresponseStations,
-      bAresponseLength,
-      bAresponseInalguration
+      bAresponseStatus
     );
 
     console.log('');
