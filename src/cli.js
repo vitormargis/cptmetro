@@ -78,36 +78,24 @@ function cptmetro(options) {
         ((optionStatus.indexOf(statusId[line.status]) >= 0) ? line : null));
     }
 
-    const tableMETRO = new Table({
-      colWidths: metroData.map(() => 23)
-    });
+    const tableMETRO = new Table({ colWidths: metroData.map(() => 23) });
+    const tableCPTM = new Table({ colWidths: cptmData.map(() => 23) });
 
-    const tableCPTM = new Table({
-      colWidths: cptmData.map(() => 23)
-    });
+    const metroAresponseLines = metroData.map(item => [chalk[item.chalk](item.name)]);
+    const metroAresponseStatus = metroData.map(item => [statusWithIcon[item.status]]);
 
-    const aAresponseLines = metroData.map(item => [chalk[item.chalk](item.name)]);
-    const aAresponseStatus = metroData.map(item => [statusWithIcon[item.status]]);
+    const cptmAresponseLines = cptmData.map(item => [chalk[item.chalk](item.name)]);
+    const cptmAresponseStatus = cptmData.map(item => [statusWithIcon[item.status]]);
 
-    const bAresponseLines = cptmData.map(item => [chalk[item.chalk](item.name)]);
-    const bAresponseStatus = cptmData.map(item => [statusWithIcon[item.status]]);
-
-    tableMETRO.push(
-      aAresponseLines,
-      aAresponseStatus
-    );
-
-    tableCPTM.push(
-      bAresponseLines,
-      bAresponseStatus
-    );
+    tableMETRO.push(metroAresponseLines, metroAresponseStatus);
+    tableCPTM.push(cptmAresponseLines, cptmAresponseStatus);
 
     console.log('');
-    console.log('METRO');
-    console.log(tableMETRO.toString());
-    console.log('');
-    console.log('CPTM');
-    console.log(tableCPTM.toString());
+    metroData.length && console.log('METRO');
+    metroData.length && console.log(tableMETRO.toString());
+    metroData.length && console.log('');
+    cptmData.length && console.log('CPTM');
+    cptmData.length && console.log(( tableCPTM.toString()));
     console.log('');
   }).catch((error) => {
     spinner.stop();

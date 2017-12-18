@@ -30,39 +30,6 @@ const cliColors = {
   SAFIRA: 'blue'
 };
 
-const infos = {
-  RUBI: {
-    stations: 20,
-    length: '10.4km',
-    inalguration: 1988
-  },
-  DIAMANTE: {
-    stations: 23,
-    length: '20.4km',
-    inalguration: 1974
-  },
-  ESMERALDA: {
-    stations: 14,
-    length: '14.7km',
-    inalguration: 1991
-  },
-  TURQUESA: {
-    stations: 18,
-    length: '22km',
-    inalguration: 1979
-  },
-  CORAL: {
-    stations: 11,
-    length: '12.8km',
-    inalguration: 2010
-  },
-  SAFIRA: {
-    stations: 7,
-    length: '20.8km',
-    inalguration: 2002
-  }
-};
-
 const getCPTM = (tries = 0) =>
   new Promise((resolve, reject) => {
     const requestCPTM = () => request.get({ url }, (error, response) => {
@@ -78,8 +45,7 @@ const getCPTM = (tries = 0) =>
             color: names[name],
             name: `Linha ${ids[name]} - ${names[name]}`,
             status: status,
-            chalk: cliColors[name],
-            info: infos[name]
+            chalk: cliColors[name]
           };
         });
 
