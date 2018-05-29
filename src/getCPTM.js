@@ -1,7 +1,7 @@
 import request from 'request';
 import cheerio from 'cheerio';
 
-const url = 'https://www.cptm.sp.gov.br/Pages/Home.aspx';
+const url = 'http://www.cptm.sp.gov.br/Pages/Home.aspx';
 
 const ids = {
   RUBI: '7',
@@ -9,7 +9,8 @@ const ids = {
   ESMERALDA: '9',
   TURQUESA: '10',
   CORAL: '11',
-  SAFIRA: '12'
+  SAFIRA: '12',
+  JADE: '13'
 };
 
 const names = {
@@ -18,7 +19,8 @@ const names = {
   ESMERALDA: 'Esmeralda',
   TURQUESA: 'Turquesa',
   CORAL: 'Coral',
-  SAFIRA: 'Safira'
+  SAFIRA: 'Safira',
+  JADE: 'Jade'
 };
 
 const cliColors = {
@@ -27,7 +29,8 @@ const cliColors = {
   ESMERALDA: 'greenBright',
   TURQUESA: 'blueBright',
   CORAL: 'redBright',
-  SAFIRA: 'blue'
+  SAFIRA: 'blue',
+  JADE: 'green'
 };
 
 const getCPTM = (tries = 0) =>
@@ -39,7 +42,6 @@ const getCPTM = (tries = 0) =>
         $('.situacao_linhas .col-xs-4').each((index, item) => {
           const name = $(item).children('.nome_linha').text();
           const status = $(item).children().next().text();
-
           cptmLines[index] = {
             id: ids[name],
             color: names[name],
