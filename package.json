@@ -13,7 +13,7 @@
     "lint:api": "./node_modules/.bin/eslint api/*.js",
     "lint:cli": "./node_modules/.bin/eslint cli/*.js",
     "lint:crawler": "./node_modules/.bin/eslint crawler/*.js",
-    "lint": "bpm run lint:api && bpm run lint:cli && bpm run lint:crawler",
+    "lint": "npm run lint:api && bpm run lint:cli && bpm run lint:crawler",
     "prepush": "npm run lint"
   },
   "preferGlobal": true,
