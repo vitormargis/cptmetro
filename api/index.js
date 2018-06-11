@@ -62,7 +62,7 @@ function paramFiltering(url, response, obj) {
 
 http.createServer((req, res) => {
   if (cors.apply(req, res)) return
-
+  let body = ''; // eslint-disable-line
   req.on('readable', () => { body += req.read(); });
   res.setHeader('Content-Type', 'text/json; charset=utf-8');
 
