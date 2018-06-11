@@ -22,7 +22,7 @@ const parse = data => JSON.parse(data)
 
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, "\\$&");
+  name = name.replace(/[[\]]/g, "\\$&");
   var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
       results = regex.exec(url);
   if (!results) return null;
@@ -58,11 +58,11 @@ function paramFiltering(url, response, obj) {
   obj.cptm = filterStatus(url, obj.cptm);
 
   return obj;
-};
+}
 
 http.createServer((req, res) => {
   if (cors.apply(req, res)) return
-  let body = '';
+
   req.on('readable', () => { body += req.read(); });
   res.setHeader('Content-Type', 'text/json; charset=utf-8');
 
