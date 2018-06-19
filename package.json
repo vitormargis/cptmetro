@@ -11,7 +11,7 @@
     "build:cli": "./node_modules/.bin/babel --out-dir lib cptmetro-cli",
     "build:crawler": "./node_modules/.bin/babel --out-dir lib cptmetro-crawler",
     "build:watch": "npm run clear &&  concurrently 'npm run build:cli -- --watch' 'npm run build:crawler -- --watch' ",
-    "netlify": "cd cptmetro-site && NODE_ENV=production ./cptmetro-site/node_modules/.bin/webpack -p",
+    "netlify": "cd cptmetro-site && NODE_ENV=production ./node_modules/.bin/webpack -p",
     "lint:api": "./node_modules/.bin/eslint api/*.js",
     "lint:cli": "./node_modules/.bin/eslint cli/*.js",
     "lint:crawler": "./node_modules/.bin/eslint crawler/*.js",
