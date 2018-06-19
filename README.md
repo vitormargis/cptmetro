@@ -2,7 +2,7 @@
 
 > A Wrapper & CLI to show rails system status for São Paulo.
 
-![Example CLI running](demo.gif)
+![Example CLI running](cptmetro-site/src/assets/images/demo.gif)
 
 ### Installing
 

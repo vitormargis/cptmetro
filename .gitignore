@@ -42,3 +42,13 @@ jspm_packages
 
 # Output of 'npm pack'
 *.tgz
+
+#cptmetro-site gitigonre
+dist
+bundle.js
+npm-debug.log
+.DS_Store
+
+# IntelliJ
+*.iml
+.idea

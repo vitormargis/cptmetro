@@ -1,2 +1,2 @@
 require('babel-register');
-module.exports = require('./api/index');
+module.exports = require('./cptmetro-api/index');
