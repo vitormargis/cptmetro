@@ -1,7 +1,7 @@
 import fs from 'fs'
 import http from 'http'
 import HttpCors from 'http-cors'
-import cptmetro from '../lib';
+import cptmetro from '../cptmetro-crawler';
 
 var cors = new HttpCors();
 const updateTime = 300000;
@@ -64,7 +64,7 @@ http.createServer((req, res) => {
   if (cors.apply(req, res)) return
   let body = ''; // eslint-disable-line
   req.on('readable', () => { body += req.read(); });
-  res.setHeader('Content-Type', 'text/json; charset=utf-8');
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
   const url = req.url;
   const currentDate = new Date().getTime();
@@ -92,4 +92,4 @@ http.createServer((req, res) => {
       return res.end(stringify(data))
     })
   );
-}).listen(9999)
+}).listen(9999);

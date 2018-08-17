@@ -39,7 +39,9 @@ const getCPTM = (tries = 0) =>
       if (!error) {
         const $ = cheerio.load(response.body);
         const cptmLines = [];
-        $('.situacao_linhas .col-xs-4').each((index, item) => {
+
+        // Page changes due to election period. Original selector was: .col-xs-4
+        $('.situacao_linhas .col-md-2').each((index, item) => {
           const name = $(item).children('.nome_linha').text();
           const status = $(item).children().next().text();
           cptmLines[index] = {
@@ -51,7 +53,7 @@ const getCPTM = (tries = 0) =>
           };
         });
 
-        return resolve(cptmLines);
+        return resolve(cptmLines.filter(line => line.id));
       }
 
       if (++tries > 5) return reject(error);
