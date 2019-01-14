@@ -7,7 +7,7 @@ export const selectLine = line => ({
 });
 
 export const featchLines = () => {
-  const url = 'http://api.cptmetro.margis.com.br/';
+  const url = 'http://localhost:9999/';
   const request = fetch(url).then(res => res.json()).then(data => data);
 
   return {

@@ -61,7 +61,7 @@ function paramFiltering(url, response, obj) {
 }
 
 http.createServer((req, res) => {
-  if (cors.apply(req, res)) return
+  if (cors.apply(req, res)) return;
   let body = ''; // eslint-disable-line
   req.on('readable', () => { body += req.read(); });
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -80,7 +80,7 @@ http.createServer((req, res) => {
             cptmetroData.metro = cptmetroResponse[0];
             cptmetroData.cptm = cptmetroResponse[1];
             return fs.writeFile(dataFile, stringify(cptmetroData), () => {
-              cptmetroData = paramFiltering(url, cptmetroResponse, cptmetroData)
+              cptmetroData = paramFiltering(url, cptmetroResponse, cptmetroData);
               return res.end(stringify(cptmetroData))
             });
           })
