@@ -18,6 +18,8 @@
     "lint:crawler": "./node_modules/.bin/eslint crawler/*.js",
     "lint": "npm run lint:api && npm run lint:cli && npm run lint:crawler",
     "prepush": "npm run lint",
+    "lambda:build": "netlify-lambda build functions/src",
+    "lambda:serve": "netlify-lambda serve functions/src",
     "postinstall": "cd cptmetro-site && npm install"
   },
   "preferGlobal": true,
@@ -77,6 +79,7 @@
     "cli-table": "^0.3.1",
     "commander": "^2.15.1",
     "http-cors": "^1.0.2",
+    "netlify-lambda": "^1.4.2",
     "node-fetch": "^1.7.2",
     "ora": "^1.4.0",
     "request": "^2.87.0"
