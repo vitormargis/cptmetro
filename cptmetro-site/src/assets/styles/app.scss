@@ -160,7 +160,7 @@ a {
   margin: 0;
 
   img {
-    width: 50%;
+    width: 40%;
   }
 }
 
@@ -519,7 +519,7 @@ a {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .line-list-container {
     width: 100%;
   }
@@ -550,11 +550,29 @@ a {
   }
 
   .search-container {
-    right: 165px;
+    right: 0;
+    top: 16px;
+  }
+
+  .main-navigation-links {
+    display: none;
+  }
+
+   .main-header {
+    padding: 1rem;  
+   }
+
+   .wrapper {
+     overflow: scroll;
+   }
+
+  .title-metro, .title-cptm {
+    margin-left: 0;
+    height: 90px;
   }
 
   .search-container input {
-    width: 100px;
+    width: 68%;
   }
 
   .title-cptm {
