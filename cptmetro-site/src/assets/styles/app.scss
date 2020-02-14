@@ -526,7 +526,7 @@ a {
 
   .line-list {
     width: 100%;
-    padding: 20px !important;
+    padding: 12px !important;
   }
 
   .line-status {
@@ -585,5 +585,11 @@ a {
 
   .line-list-container:before {
     display: none;
+    width: 135px;
+    font-size: small;
+  }
+  
+  .list-line-item{
+    font-size: small;
   }
 }
